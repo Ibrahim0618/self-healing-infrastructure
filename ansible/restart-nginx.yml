@@ -1,0 +1,13 @@
+
+---
+- name: Self-heal NGINX container
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Restart NGINX container
+      ansible.builtin.command:
+        cmd: docker start self-healing-nginx
+      register: restart_result
+      changed_when: restart_result.rc == 0
